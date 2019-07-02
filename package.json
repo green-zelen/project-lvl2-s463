@@ -1,6 +1,6 @@
 {
   "name": "difference_calculator_mariia.perlovskaia_hexlet",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Difference Calculator Project",
   "bin": {
     "gendiff": "dist/bin/index.js"
@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/green-zelen/project-lvl2-s463#readme",
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
@@ -42,7 +41,6 @@
     "commander": "^2.20.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.2",
-    "readline-sync": "^1.4.9"
+    "eslint-plugin-react": "^7.14.2"
   }
 }
