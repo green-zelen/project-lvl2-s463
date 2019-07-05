@@ -5,12 +5,14 @@
   "bin": {
     "gendiff": "dist/bin/index.js"
   },
+  "main": "./src/bin/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -28,19 +30,22 @@
   },
   "homepage": "https://github.com/green-zelen/project-lvl2-s463#readme",
   "devDependencies": {
-    "@babel/core": "^7.4.5",
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.0",
     "@babel/node": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "babel-cli": "^6.26.0",
+    "@babel/preset-env": "^7.5.0",
     "babel-eslint": "^10.0.2",
-    "eslint": "^5.16.0",
+    "babel-jest": "^24.8.0",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.18.0"
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jest": "^22.7.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.2",
+    "jest": "^24.8.0"
   },
   "dependencies": {
-    "commander": "^2.20.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.2"
+    "commander": "^2.20.0"
   }
 }
