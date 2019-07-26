@@ -1,9 +1,11 @@
+import * as _ from 'lodash';
+
 function getDiff(before, after) {
   const keysOfAfter = Object.keys(after);
   const keysOfBefore = Object.keys(before);
 
   const reducerForAfter = (accAfter, elementAfter) => {
-    if (elementAfter in before) {
+    if (_.has(before, elementAfter)) {
       if (after[elementAfter] !== before[elementAfter]) {
         return { ...accAfter, [`- ${elementAfter}`]: before[elementAfter], [`+ ${elementAfter}`]: after[elementAfter] };
       }

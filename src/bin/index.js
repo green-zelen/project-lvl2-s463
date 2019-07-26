@@ -1,11 +1,8 @@
 #!/usr/bin/env node
 import program from 'commander';
-import * as fs from 'fs';
 import getDiff from './genDiff';
+import { readJsonFile } from './utilities';
 
-function readJsonFile(filePath) {
-  return JSON.parse(fs.readFileSync(filePath));
-}
 
 let firstFile;
 let secondFile;
@@ -22,7 +19,9 @@ program
 
 program.parse(process.argv);
 
-if (!process.argv.slice(2).length) {
+if (process.argv.slice(2).length === 0) {
+  console.log(`[INFO] cli args len: ${process.argv.slice(2).length}`);
+
   program.outputHelp();
   process.exit(1);
 }

@@ -1,6 +1,6 @@
 {
   "name": "difference_calculator_mariia.perlovskaia_hexlet",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Difference Calculator Project",
   "bin": {
     "gendiff": "dist/bin/index.js"
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "prepublishOnly": "npm run build",
-    "test": "jest"
+    "test": "jest src/bin"
   },
   "repository": {
     "type": "git",
@@ -46,6 +46,7 @@
     "jest": "^24.8.0"
   },
   "dependencies": {
-    "commander": "^2.20.0"
+    "commander": "^2.20.0",
+    "lodash": "^4.17.14"
   }
 }
