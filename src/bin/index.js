@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import program from 'commander';
 import getDiff from './genDiff';
-import { readJsonFile } from './utilities';
+import { readJsonFile } from './parsers';
 
 
 let firstFile;
