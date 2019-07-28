@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import program from 'commander';
 import getDiff from './genDiff';
-import { readJsonFile } from './parsers';
+import { readFile } from './parsers';
 
 
 let firstFile;
@@ -25,7 +25,7 @@ if (process.argv.slice(2).length === 0) {
   program.outputHelp();
   process.exit(1);
 }
-const firstJson = readJsonFile(firstFile);
-const secondJson = readJsonFile(secondFile);
+const first = readFile(firstFile);
+const second = readFile(secondFile);
 
-console.log(getDiff(firstJson, secondJson));
+console.log(getDiff(first, second));
