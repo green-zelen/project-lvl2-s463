@@ -1,17 +1,20 @@
 import * as fs from 'fs';
 import * as yaml from 'js-yaml';
+import * as ini from 'ini';
 import * as path from 'path';
 
 
-export const getParser = (filePath) => {
+export const getParser = (ext) => {
   let parseFile; // may be undefined
-  const ext = path.extname(filePath);
   switch (ext) {
     case '.json':
       parseFile = JSON.parse;
       break;
     case '.yml':
       parseFile = yaml.safeLoad;
+      break;
+    case '.ini':
+      parseFile = ini.parse;
       break;
 
     default:
@@ -21,9 +24,11 @@ export const getParser = (filePath) => {
   return parseFile;
 };
 
+export const getExtention = filePath => path.extname(filePath);
+
 export const readFile = (filePath) => {
-  const parser = getParser(filePath);
-  return parser(fs.readFileSync(filePath));
+  const parser = getParser(getExtention(filePath));
+  return parser(fs.readFileSync(filePath, 'utf-8'));
 };
 
 export default readFile;
