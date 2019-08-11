@@ -1,0 +1,8 @@
+{
+    "group1": {
+        "foo": "bar",
+        "baz": "bars",
+        "nest": "str"
+    },
+    "way": 22
+}

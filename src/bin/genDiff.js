@@ -1,22 +1,31 @@
 import * as _ from 'lodash';
 
-function getDiff(before, after) {
+export function getDiff(before, after) {
   const keysOfAfter = Object.keys(after);
   const keysOfBefore = Object.keys(before);
 
-  const reducerForAfter = (accAfter, elementAfter) => {
-    if (_.has(before, elementAfter)) {
-      if (after[elementAfter] !== before[elementAfter]) {
-        return { ...accAfter, [`- ${elementAfter}`]: before[elementAfter], [`+ ${elementAfter}`]: after[elementAfter] };
+  const reducerForAfter = (accAfter, el) => {
+    if (_.has(before, el)) {
+      if (after[el] !== before[el]) {
+        if (typeof (after[el]) !== 'object') {
+          return { ...accAfter, [`- ${el}`]: before[el], [`+ ${el}`]: after[el] };
+        }
+        if (typeof (before[el]) !== 'object') {
+          return { ...accAfter, [`- ${el}`]: before[el], [`+ ${el}`]: after[el] };
+        }
+        return { ...accAfter, [el]: getDiff(before[el], after[el]) };
       }
-      return { ...accAfter, [elementAfter]: after[elementAfter] };
+      return { ...accAfter, [el]: after[el] };
     }
-    return { ...accAfter, [`+ ${elementAfter}`]: after[elementAfter] };
+    if (after[el] === undefined) {
+      return accAfter;
+    }
+    return { ...accAfter, [`+ ${el}`]: after[el] };
   };
 
   const extraacc = keysOfAfter.reduce(reducerForAfter, {});
   const deleteKeys = keysOfBefore.filter((el => !(keysOfAfter.includes(el))));
-  const reducerForBefore = (accBefore, elementBefore) => ({ ...accBefore, [`- ${elementBefore}`]: before[elementBefore] });
+  const reducerForBefore = (accBefore, el) => ({ ...accBefore, [`- ${el}`]: before[el] });
   return (deleteKeys.reduce(reducerForBefore, extraacc));
 }
 
