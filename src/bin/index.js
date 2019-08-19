@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import program from 'commander';
-import getDiff from './genDiff';
+import { getDiff } from './genDiff';
 import { readFile } from './parsers';
 
 
