@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import program from 'commander';
+import * as path from 'path';
 import { getDiff } from './genDiff';
+import { renderDiff } from './renderDiff';
 import { readFile } from './parsers';
 
 
@@ -11,8 +13,8 @@ program
   .version('0.0.1')
   .description('Compares two configuration files and shows a difference.')
   .arguments('<firstConfig> <secondConfig>')
-  .action((firstCongig, secondConfig) => {
-    firstFile = firstCongig;
+  .action((firstConfig, secondConfig) => {
+    firstFile = firstConfig;
     secondFile = secondConfig;
   })
   .option('-f, --format [type]', 'Output format');
@@ -28,4 +30,5 @@ if (process.argv.slice(2).length === 0) {
 const first = readFile(firstFile);
 const second = readFile(secondFile);
 
-console.log(getDiff(first, second));
+const objectForRender = getDiff(first, second);
+console.log(renderDiff(objectForRender, path.extname(firstFile), path.extname(secondFile)));

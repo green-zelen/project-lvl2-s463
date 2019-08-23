@@ -26,7 +26,7 @@ export function getDiff(before, after) {
   const extraacc = keysOfAfter.reduce(reducerForAfter, {});
   const deleteKeys = keysOfBefore.filter((el => !(keysOfAfter.includes(el))));
   const reducerForBefore = (accBefore, el) => ({ ...accBefore, [`- ${el}`]: before[el] });
-  return (deleteKeys.reduce(reducerForBefore, extraacc));
+  return deleteKeys.reduce(reducerForBefore, extraacc);
 }
 
 export default getDiff;
