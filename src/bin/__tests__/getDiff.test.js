@@ -1,5 +1,7 @@
+import * as fs from 'fs';
 import { getDiff } from '../genDiff';
 import { readFile } from '../parsers';
+import { renderJson } from '../renderDiff';
 
 const jsonBefore1 = readFile(`${__dirname}/__fixtures__/__txt__/1before.json`);
 const jsonAfter1 = readFile(`${__dirname}/__fixtures__/__txt__/1after.json`);
@@ -13,8 +15,8 @@ const jsonAfter2 = readFile(`${__dirname}/__fixtures__/__txt__/2after.json`);
 // const iniBefore4 = readFile(`${__dirname}/__fixtures__/__txt__/4before.ini`);
 // const iniAfter4 = readFile(`${__dirname}/__fixtures__/__txt__/4after.ini`);
 
-// const jsonBefore5 = readFile(`${__dirname}/__fixtures__/__txt__/5before.json`);
-// const jsonAfter5 = readFile(`${__dirname}/__fixtures__/__txt__/5after.json`);
+const jsonBefore5 = readFile(`${__dirname}/__fixtures__/__txt__/5before.json`);
+const jsonAfter5 = readFile(`${__dirname}/__fixtures__/__txt__/5after.json`);
 
 // const jsonBefore6 = readFile(`${__dirname}/__fixtures__/__txt__/6before.json`);
 // const jsonAfter6 = readFile(`${__dirname}/__fixtures__/__txt__/6after.json`);
@@ -26,12 +28,11 @@ const jsonAfter2 = readFile(`${__dirname}/__fixtures__/__txt__/2after.json`);
 // const iniAfter8 = readFile(`${__dirname}/__fixtures__/__txt__/8after.ini`);
 
 test('compare two first jsons', () => {
-  console.log();
-  expect(getDiff(jsonBefore1, jsonAfter1)).toEqual(readFile(`${__dirname}/__fixtures__/__txt__/1expect.json`));
+  expect(getDiff(jsonBefore1, jsonAfter1, renderJson)).toBe(fs.readFileSync(`${__dirname}/__fixtures__/__txt__/1expect.txt`, 'utf-8'));
 });
 
 test('compare two second jsons', () => {
-  expect(getDiff(jsonBefore2, jsonAfter2)).toEqual(readFile(`${__dirname}/__fixtures__/__txt__/2expect.json`));
+  expect(getDiff(jsonBefore2, jsonAfter2, renderJson)).toBe(fs.readFileSync(`${__dirname}/__fixtures__/__txt__/2expect.txt`, 'utf-8'));
 });
 
 // test('compare two first yamls', () => {
@@ -44,10 +45,9 @@ test('compare two second jsons', () => {
 //   .toEqual(readFile(`${__dirname}/__fixtures__/__txt__/4expect.ini`));
 // });
 
-// test('compare two nested jsons', () => {
-//   expect(getDiff(jsonBefore5, jsonAfter5))
-//   .toEqual(readFile(`${__dirname}/__fixtures__/__txt__/5expect.json`));
-// });
+test('compare two nested jsons', () => {
+  expect(getDiff(jsonBefore5, jsonAfter5, renderJson)).toBe(fs.readFileSync(`${__dirname}/__fixtures__/__txt__/5expect.txt`, 'utf-8'));
+});
 
 // test('compare two short nested jsons', () => {
 //   expect(getDiff(jsonBefore6, jsonAfter6))
