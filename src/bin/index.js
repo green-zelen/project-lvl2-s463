@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import program from 'commander';
-import * as path from 'path';
-import { getDiff } from './genDiff';
-import { renderDiff } from './renderDiff';
+import { getAst } from './genDiff';
+import renderDiff from './renderDiff';
 import { readFile } from './parsers';
 
 
@@ -30,5 +29,6 @@ if (process.argv.slice(2).length === 0) {
 const first = readFile(firstFile);
 const second = readFile(secondFile);
 
-const objectForRender = getDiff(first, second);
-console.log(renderDiff(objectForRender, path.extname(firstFile), path.extname(secondFile)));
+const objectForRender = getAst(first, second);
+const renderResult = renderDiff(objectForRender);
+console.log(renderResult);

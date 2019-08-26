@@ -1,4 +1,4 @@
 {
-      timeout: 50
-    + verbose: true
+    timeout: 50
+  + verbose: true
 }
