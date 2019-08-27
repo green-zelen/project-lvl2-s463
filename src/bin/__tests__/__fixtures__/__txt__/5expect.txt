@@ -7,13 +7,13 @@
       + setting3: {
             key: value
         }
-        setting6: {
-            key: value
-          + ops: vops
-        }
       + setting4: blah blah
       + setting5: {
             key5: value5
+        }
+        setting6: {
+            key: value
+          + ops: vops
         }
     }
     group1: {
@@ -31,6 +31,4 @@
   + group3: {
         fee: 100500
     }
-    - value: true
-    - txt: 3
 }
