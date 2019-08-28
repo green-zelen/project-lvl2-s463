@@ -31,14 +31,14 @@ const first = readFile(firstFile);
 const second = readFile(secondFile);
 
 const ast = getAst(first, second);
-const recSort = (rt) => {
-  rt = rt.map(el =>  _.has(el, 'children') ? { ...el, children: recSort(el.children) } : el);
+const recSort = (a) => {
+  const rt = a.map(el =>  _.has(el, 'children') ? { ...el, children: recSort(el.children) } : el);
   return _.sortBy(rt, el => el.key);
 };
 
 const sortedAst = recSort(ast);
 
-console.log(sortedAst[1].children);
+console.log(sortedAst);
 
 const renderResult = renderDiff(sortedAst);
 console.log(renderResult);

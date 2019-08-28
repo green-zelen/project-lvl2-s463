@@ -1,3 +1,6 @@
+// todo: разобраться с импортами
+const isObject = obj => typeof obj === 'object';
+
 const makeDiff = (diff, depth) => {
   const rep = ('  '.repeat(depth));
   const repCh = rep.slice(2);
@@ -11,6 +14,8 @@ const makeDiff = (diff, depth) => {
       [`${repCh}+ ${key}`]: value,
     }),
     children: (acc, { key, children }) => ({ ...acc, [`${rep}${key}`]: makeDiff(children, depth + 1) }),
+    added_has_children: (acc, { key, children }) => ({ ...acc, [`${repCh}+ ${key}`]: makeDiff(children, depth + 1) }),
+    deleted_has_children: (acc, { key, children }) => ({ ...acc, [`${repCh}- ${key}`]: makeDiff(children, depth + 1) }),
   };
   const filesDiff = diff.reduce((acc, el) => renderMethodes[el.type](acc, el), {});
   return filesDiff;
