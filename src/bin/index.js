@@ -32,13 +32,11 @@ const second = readFile(secondFile);
 
 const ast = getAst(first, second);
 const recSort = (a) => {
-  const rt = a.map(el =>  _.has(el, 'children') ? { ...el, children: recSort(el.children) } : el);
+  const rt = a.map(el => (_.has(el, 'children') ? { ...el, children: recSort(el.children) } : el));
   return _.sortBy(rt, el => el.key);
 };
 
 const sortedAst = recSort(ast);
 
-console.log(sortedAst);
-
 const renderResult = renderDiff(sortedAst);
-console.log(renderResult);
+console.log(`${renderResult}`);

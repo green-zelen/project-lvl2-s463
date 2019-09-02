@@ -17,6 +17,4 @@
   group2: {
     abc: 12345
   },
-  value: true,
-  txt: 3
 }

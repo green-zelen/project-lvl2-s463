@@ -2,6 +2,8 @@ import _ from 'lodash';
 
 export const isObject = obj => typeof obj === 'object';
 
+const checkObj = (el, gen) => (_.isObject(el) ? gen(el, el) : el);
+
 const dispatcher = [
   {
     type: 'equal',
@@ -11,12 +13,12 @@ const dispatcher = [
   {
     type: 'added',
     check: (key, before) => !_.has(before, key),
-    apply: (before, after, key) => ({ value: after[key] }),
+    apply: (before, after, key, genDiff) => ({ value: checkObj(after[key], genDiff) }),
   },
   {
     type: 'deleted',
     check: (key, before, after) => !_.has(after, key),
-    apply: (before, after, key) => ({ preValue: before[key] }),
+    apply: (before, after, key, genDiff) => ({ preValue: checkObj(before[key], genDiff) }),
   },
   {
     type: 'children',
@@ -26,7 +28,9 @@ const dispatcher = [
   {
     type: 'changed',
     check: (key, before, after) => before[key] !== after[key],
-    apply: (before, after, key) => ({ preValue: before[key], value: after[key] }),
+    apply: (before, after, key, genDiff) => (
+      { preValue: checkObj(before[key], genDiff), value: checkObj(after[key], genDiff) }
+    ),
   },
 ];
 
