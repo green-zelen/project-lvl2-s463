@@ -1,8 +1,7 @@
 #!/usr/bin/env node
-import _ from 'lodash';
 import program from 'commander';
-import { getAst } from './genDiff';
-import renderDiff from './renderDiff';
+import { getSortedAst } from './genDiff';
+import renderDiff from './__formatters__/renderDiff';
 import { readFile } from './parsers';
 
 
@@ -30,13 +29,7 @@ if (process.argv.slice(2).length === 0) {
 const first = readFile(firstFile);
 const second = readFile(secondFile);
 
-const ast = getAst(first, second);
-const recSort = (a) => {
-  const rt = a.map(el => (_.has(el, 'children') ? { ...el, children: recSort(el.children) } : el));
-  return _.sortBy(rt, el => el.key);
-};
+const ast = getSortedAst(first, second);
 
-const sortedAst = recSort(ast);
-
-const renderResult = renderDiff(sortedAst);
-console.log(`${renderResult}`);
+const renderResult = renderDiff(ast);
+console.log(renderResult);
