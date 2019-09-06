@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const makeDiff = (diff, depth) => {
+const makeDiff = (ast, depth) => {
   const stringify = (el, d) => (!_.isObject(el) ? el : makeDiff(el, d).concat(`${'    '.repeat(d - 1)}}`));
   const rep = ('    '.repeat(depth));
   const repCh = rep.slice(2);
@@ -13,9 +13,9 @@ const makeDiff = (diff, depth) => {
     ),
     children: (acc, { key, children }) => acc.concat(`${rep}${key}: ${makeDiff(children, depth + 1)}${rep}}\n`),
   };
-  const filesDiff = diff.reduce((acc, el) => renderMethodes[el.type](acc, el), '{\n');
+  const filesDiff = ast.reduce((acc, el) => renderMethodes[el.type](acc, el), '{\n');
   return filesDiff;
 };
 
-const renderDiff = diff => makeDiff(diff, 1).concat('}');
+const renderDiff = ast => makeDiff(ast, 1).concat('}');
 export default renderDiff;

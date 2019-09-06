@@ -2,6 +2,7 @@
 import program from 'commander';
 import { getSortedAst } from './genDiff';
 import renderDiff from './__formatters__/renderDiff';
+import renderPlain from './__formatters__/renderPlain';
 import { readFile } from './parsers';
 
 
@@ -28,8 +29,19 @@ if (process.argv.slice(2).length === 0) {
 }
 const first = readFile(firstFile);
 const second = readFile(secondFile);
-
 const ast = getSortedAst(first, second);
 
-const renderResult = renderDiff(ast);
+let renderResult;
+
+switch (program.format) {
+  case 'diff':
+    renderResult = renderDiff(ast);
+    break;
+  case 'plain':
+    renderResult = renderPlain(ast);
+    break;
+  default:
+    renderResult = renderDiff(ast);
+    break;
+}
 console.log(renderResult);
