@@ -3,6 +3,7 @@ import program from 'commander';
 import { getSortedAst } from './genDiff';
 import renderDiff from './__formatters__/renderDiff';
 import renderPlain from './__formatters__/renderPlain';
+import renderJson from './__formatters__/renderJson';
 import { readFile } from './parsers';
 
 
@@ -39,6 +40,9 @@ switch (program.format) {
     break;
   case 'plain':
     renderResult = renderPlain(ast);
+    break;
+  case 'json':
+    renderResult = renderJson(ast);
     break;
   default:
     renderResult = renderDiff(ast);
