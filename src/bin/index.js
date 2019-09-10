@@ -32,20 +32,17 @@ const first = readFile(firstFile);
 const second = readFile(secondFile);
 const ast = getSortedAst(first, second);
 
-let renderResult;
-
 switch (program.format) {
   case 'diff':
-    renderResult = renderDiff(ast);
+    console.log(renderDiff(ast));
     break;
   case 'plain':
-    renderResult = renderPlain(ast);
+    console.log(renderPlain(ast));
     break;
   case 'json':
-    renderResult = renderJson(ast);
+    console.log(renderJson(ast));
     break;
   default:
-    renderResult = renderDiff(ast);
+    console.log(renderDiff(ast));
     break;
 }
-console.log(renderResult);

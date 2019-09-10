@@ -42,19 +42,16 @@ export const getKeys = (before, after) => {
   return [...allKeysSet];
 };
 
-const recursionSort = (a) => {
-  const rt = a.map(el => (_.has(el, 'children') ? { ...el, children: recursionSort(el.children) } : el));
+const recursionSort = (ast) => {
+  const rt = ast.map(el => (_.has(el, 'children') ? { ...el, children: recursionSort(el.children) } : el));
   return _.sortBy(rt, el => el.key);
 };
 
 const getAst = (before, after) => {
   const keys = getKeys(before, after);
   const ast = keys.map((key) => {
-    let d = _.find(dispatcher, f => f.check(key, before, after));
-    if (d === undefined) {
-      d = { type: 'unknown', apply: () => ({ value: 'meh' }) };
-    }
-    const { type, apply } = d;
+    const foundNode = _.find(dispatcher, f => f.check(key, before, after));
+    const { type, apply } = foundNode;
     return { key, type, ...apply(before, after, key, getAst) };
   });
   return ast;

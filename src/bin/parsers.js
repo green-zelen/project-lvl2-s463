@@ -5,23 +5,18 @@ import * as path from 'path';
 
 
 export const getParser = (ext) => {
-  let parseFile; // may be undefined
   switch (ext) {
     case '.json':
-      parseFile = JSON.parse;
-      break;
+      return JSON.parse;
     case '.yml':
-      parseFile = yaml.safeLoad;
-      break;
+      return yaml.safeLoad;
     case '.ini':
-      parseFile = ini.parse;
-      break;
+      return ini.parse;
 
     default:
       console.log(`[ERROR] can't get parser for extname: ${ext}`);
-      break;
+      return 1;
   }
-  return parseFile;
 };
 
 export const getExtention = filePath => path.extname(filePath);
