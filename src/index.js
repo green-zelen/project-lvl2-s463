@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import program from 'commander';
-import { getSortedAst } from './genDiff';
-import renderDiff from './__formatters__/renderDiff';
-import renderPlain from './__formatters__/renderPlain';
-import renderJson from './__formatters__/renderJson';
-import { readFile } from './parsers';
+import { getSortedAst } from './bin/genDiff';
+import renderDiff from './bin/__formatters__/renderDiff';
+import renderPlain from './bin/__formatters__/renderPlain';
+import renderJson from './bin/__formatters__/renderJson';
+import { readFile } from './bin/parsers';
 
 
 let firstFile;

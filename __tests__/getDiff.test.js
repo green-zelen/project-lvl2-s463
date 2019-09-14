@@ -1,9 +1,9 @@
 import * as fs from 'fs';
-import { getSortedAst } from '../genDiff';
-import { readFile } from '../parsers';
-import renderDiff from '../__formatters__/renderDiff';
-import renderPlain from '../__formatters__/renderPlain';
-import renderJson from '../__formatters__/renderJson';
+import { getSortedAst } from '../src/bin/genDiff';
+import { readFile } from '../src/bin/parsers';
+import renderDiff from '../src/bin/__formatters__/renderDiff';
+import renderPlain from '../src/bin/__formatters__/renderPlain';
+import renderJson from '../src/bin/__formatters__/renderJson';
 
 const jsonBefore1 = readFile(`${__dirname}/__fixtures__/__txt__/1before.json`);
 const jsonAfter1 = readFile(`${__dirname}/__fixtures__/__txt__/1after.json`);
