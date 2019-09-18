@@ -1,27 +1,27 @@
 import * as fs from 'fs';
 import { getSortedAst } from '../src/bin/genDiff';
-import { readFile } from '../src/bin/parsers';
+import { getObject } from '../src/bin/parsers';
 import renderDiff from '../src/bin/__formatters__/renderDiff';
 import renderPlain from '../src/bin/__formatters__/renderPlain';
 import renderJson from '../src/bin/__formatters__/renderJson';
 
-const jsonBefore1 = readFile(`${__dirname}/__fixtures__/__txt__/1before.json`);
-const jsonAfter1 = readFile(`${__dirname}/__fixtures__/__txt__/1after.json`);
+const jsonBefore1 = getObject(`${__dirname}/__fixtures__/__txt__/1before.json`);
+const jsonAfter1 = getObject(`${__dirname}/__fixtures__/__txt__/1after.json`);
 
-const yamlBefore2 = readFile(`${__dirname}/__fixtures__/__txt__/2before.yml`);
-const yamlAfter2 = readFile(`${__dirname}/__fixtures__/__txt__/2after.yml`);
+const yamlBefore2 = getObject(`${__dirname}/__fixtures__/__txt__/2before.yml`);
+const yamlAfter2 = getObject(`${__dirname}/__fixtures__/__txt__/2after.yml`);
 
-const iniBefore3 = readFile(`${__dirname}/__fixtures__/__txt__/3before.ini`);
-const iniAfter3 = readFile(`${__dirname}/__fixtures__/__txt__/3after.ini`);
+const iniBefore3 = getObject(`${__dirname}/__fixtures__/__txt__/3before.ini`);
+const iniAfter3 = getObject(`${__dirname}/__fixtures__/__txt__/3after.ini`);
 
-const jsonBefore4 = readFile(`${__dirname}/__fixtures__/__txt__/4before.json`);
-const jsonAfter4 = readFile(`${__dirname}/__fixtures__/__txt__/4after.json`);
+const jsonBefore4 = getObject(`${__dirname}/__fixtures__/__txt__/4before.json`);
+const jsonAfter4 = getObject(`${__dirname}/__fixtures__/__txt__/4after.json`);
 
-const yamlBefore5 = readFile(`${__dirname}/__fixtures__/__txt__/5before.yml`);
-const yamlAfter5 = readFile(`${__dirname}/__fixtures__/__txt__/5after.yml`);
+const yamlBefore5 = getObject(`${__dirname}/__fixtures__/__txt__/5before.yml`);
+const yamlAfter5 = getObject(`${__dirname}/__fixtures__/__txt__/5after.yml`);
 
-const iniBefore6 = readFile(`${__dirname}/__fixtures__/__txt__/6before.ini`);
-const iniAfter6 = readFile(`${__dirname}/__fixtures__/__txt__/6after.ini`);
+const iniBefore6 = getObject(`${__dirname}/__fixtures__/__txt__/6before.ini`);
+const iniAfter6 = getObject(`${__dirname}/__fixtures__/__txt__/6after.ini`);
 
 test('compare two jsons/diff', () => {
   expect(renderDiff(getSortedAst(jsonBefore1, jsonAfter1))).toBe(fs.readFileSync(`${__dirname}/__fixtures__/__txt__/1expect.txt`, 'utf-8'));

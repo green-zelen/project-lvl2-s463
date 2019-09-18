@@ -21,9 +21,11 @@ export const getParser = (ext) => {
 
 export const getExtention = filePath => path.extname(filePath);
 
-export const readFile = (filePath) => {
-  const parser = getParser(getExtention(filePath));
-  return parser(fs.readFileSync(filePath, 'utf-8'));
+export const readFile = (filePath, format) => fs.readFileSync(filePath, format);
+
+export const getObject = (filePath) => {
+  const parsing = getParser(getExtention(filePath));
+  return parsing(readFile(filePath, 'utf-8'));
 };
 
-export default readFile;
+export default getObject;

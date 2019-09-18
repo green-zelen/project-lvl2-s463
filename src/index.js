@@ -4,7 +4,7 @@ import { getSortedAst } from './bin/genDiff';
 import renderDiff from './bin/__formatters__/renderDiff';
 import renderPlain from './bin/__formatters__/renderPlain';
 import renderJson from './bin/__formatters__/renderJson';
-import { readFile } from './bin/parsers';
+import { getObject } from './bin/parsers';
 
 
 let firstFile;
@@ -28,8 +28,8 @@ if (process.argv.slice(2).length === 0) {
   program.outputHelp();
   process.exit(1);
 }
-const first = readFile(firstFile);
-const second = readFile(secondFile);
+const first = getObject(firstFile);
+const second = getObject(secondFile);
 const ast = getSortedAst(first, second);
 
 switch (program.format) {
