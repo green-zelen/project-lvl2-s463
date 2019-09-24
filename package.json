@@ -1,11 +1,11 @@
 {
   "name": "difference_calculator_mariia.perlovskaia_hexlet",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Difference Calculator Project",
   "bin": {
-    "gendiff": "dist/bin/index.js"
+    "gendiff": "dist/bin/gendiff.js"
   },
-  "main": "./src/bin/index.js",
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],

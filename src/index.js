@@ -1,48 +1,39 @@
 #!/usr/bin/env node
-import program from 'commander';
-import { getSortedAst } from './bin/genDiff';
-import renderDiff from './bin/__formatters__/renderDiff';
-import renderPlain from './bin/__formatters__/renderPlain';
-import renderJson from './bin/__formatters__/renderJson';
-import { getObject } from './bin/parsers';
+
+import {
+  getSortedAst,
+} from './genDiff';
+import renderDiff from './__formatters__/renderDiff';
+import renderPlain from './__formatters__/renderPlain';
+import renderJson from './__formatters__/renderJson';
+import {
+  getObject,
+} from './parsers';
 
 
-let firstFile;
-let secondFile;
+const getRender = (format) => {
+  switch (format) {
+    case 'diff':
+      return renderDiff;
 
-program
-  .version('0.0.1')
-  .description('Compares two configuration files and shows a difference.')
-  .arguments('<firstConfig> <secondConfig>')
-  .action((firstConfig, secondConfig) => {
-    firstFile = firstConfig;
-    secondFile = secondConfig;
-  })
-  .option('-f, --format [type]', 'Output format');
+    case 'plain':
+      return renderPlain;
 
-program.parse(process.argv);
+    case 'json':
+      return renderJson;
 
-if (process.argv.slice(2).length === 0) {
-  console.log(`[INFO] cli args len: ${process.argv.slice(2).length}`);
+    default:
+      return renderDiff;
+  }
+};
 
-  program.outputHelp();
-  process.exit(1);
-}
-const first = getObject(firstFile);
-const second = getObject(secondFile);
-const ast = getSortedAst(first, second);
+const genDiff = (f, s, format) => {
+  const first = getObject(f);
+  const second = getObject(s);
+  const ast = getSortedAst(first, second);
 
-switch (program.format) {
-  case 'diff':
-    console.log(renderDiff(ast));
-    break;
-  case 'plain':
-    console.log(renderPlain(ast));
-    break;
-  case 'json':
-    console.log(renderJson(ast));
-    break;
-  default:
-    console.log(renderDiff(ast));
-    break;
-}
+  const render = getRender(format);
+  return render(ast);
+};
+
+export default genDiff;
