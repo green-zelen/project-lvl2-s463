@@ -27,10 +27,8 @@ const getRender = (format) => {
   }
 };
 
-const genDiff = (f, s, format) => {
-  const first = getObject(f);
-  const second = getObject(s);
-  const ast = getSortedAst(first, second);
+const genDiff = (first, second, format) => {
+  const ast = getSortedAst(getObject(first), getObject(second));
 
   const render = getRender(format);
   return render(ast);
