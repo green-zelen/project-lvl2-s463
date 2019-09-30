@@ -1,8 +1,7 @@
+import fs from 'fs';
 import * as yaml from 'js-yaml';
 import * as ini from 'ini';
 import * as path from 'path';
-
-const fs = require('fs');
 
 export const getParser = (ext) => {
   switch (ext) {
