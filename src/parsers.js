@@ -1,8 +1,8 @@
-import * as fs from 'fs';
 import * as yaml from 'js-yaml';
 import * as ini from 'ini';
 import * as path from 'path';
 
+const fs = require('fs');
 
 export const getParser = (ext) => {
   switch (ext) {
@@ -14,8 +14,7 @@ export const getParser = (ext) => {
       return ini.parse;
 
     default:
-      console.log(`[ERROR] can't get parser for extname: ${ext}`);
-      return 1;
+      throw new Error(`[Can't get parser for extension: ${ext}`);
   }
 };
 

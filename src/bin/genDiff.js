@@ -8,7 +8,12 @@ program
   .option('-f, --format [type]', 'Output format')
   .arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig) => {
-    console.log(genDiff(firstConfig, secondConfig, program.format));
+    try {
+      console.log(genDiff(firstConfig, secondConfig, program.format));
+    } catch (e) {
+      console.log(`Failed to build diff: ${e}`);
+      process.exit(1);
+    }
   })
   .parse(process.argv);
 

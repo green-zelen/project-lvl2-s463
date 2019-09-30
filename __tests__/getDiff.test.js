@@ -1,6 +1,7 @@
-import * as fs from 'fs';
 import path from 'path';
 import genDiff from '../src';
+
+const fs = require('fs');
 
 test.each([
   ['1before.json', '1after.json', '1expect.txt'],
