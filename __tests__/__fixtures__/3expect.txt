@@ -1,4 +1,18 @@
 {
-    timeout: 50
-  + verbose: true
+    Hosts: {
+        Cache: {
+            Enable: 0
+            File: hostdb.txt
+        }
+      + EXT: {
+            ext: txt
+        }
+      - NIS: {
+            Map: hosts.byaddr
+        }
+        Options: {
+          - Browse Type: 0
+          + Browse Type: 1
+        }
+    }
 }

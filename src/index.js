@@ -1,7 +1,7 @@
 import {
   getSortedAst,
 } from './genDiff';
-import getRender from './formatters/index';
+import getRender from './formatters';
 import {
   getObject,
 } from './parsers';

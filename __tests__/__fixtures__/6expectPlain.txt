@@ -1,3 +1,0 @@
-Property 'Hosts.EXT' was added with value: '[complex value]'
-Property 'Hosts.NIS' was removed
-Property 'Hosts.Options.Browse Type' was updated. From '0' to '1'

@@ -1,6 +1,6 @@
 {
   "name": "difference_calculator_mariia.perlovskaia_hexlet",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Difference Calculator Project",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
